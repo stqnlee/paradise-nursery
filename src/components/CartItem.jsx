@@ -1,17 +1,17 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  decreaseQty,
-  increaseQty,
-  removeFromCart,
+  removeItem,
+  updateQuantity,
   selectCartItems,
-  selectCartTotal
+  selectCartTotal,
 } from "../redux/CartSlice";
 import { useNavigate } from "react-router-dom";
 
 export default function CartItem() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const items = useSelector(selectCartItems);
   const total = useSelector(selectCartTotal);
 
@@ -34,7 +34,9 @@ export default function CartItem() {
 
               <div>
                 <div style={{ fontWeight: 900, fontSize: 18 }}>{item.name}</div>
-                <div style={{ opacity: 0.85 }}>Unit Price: ${item.price.toFixed(2)}</div>
+                <div style={{ opacity: 0.85 }}>
+                  Unit Price: ${item.price.toFixed(2)}
+                </div>
                 <div style={{ marginTop: 8, fontWeight: 800 }}>
                   Item Total: ${(item.price * item.quantity).toFixed(2)}
                 </div>
@@ -44,17 +46,39 @@ export default function CartItem() {
                 <div className="qtyBox">
                   <button
                     className="smallBtn"
-                    onClick={() => dispatch(decreaseQty(item.id))}
+                    onClick={() =>
+                      dispatch(
+                        updateQuantity({
+                          id: item.id,
+                          quantity: item.quantity - 1,
+                        })
+                      )
+                    }
                     disabled={item.quantity <= 1}
                   >
                     -
                   </button>
-                  <div style={{ fontWeight: 900, minWidth: 24, textAlign: "center" }}>
+
+                  <div
+                    style={{
+                      fontWeight: 900,
+                      minWidth: 24,
+                      textAlign: "center",
+                    }}
+                  >
                     {item.quantity}
                   </div>
+
                   <button
                     className="smallBtn"
-                    onClick={() => dispatch(increaseQty(item.id))}
+                    onClick={() =>
+                      dispatch(
+                        updateQuantity({
+                          id: item.id,
+                          quantity: item.quantity + 1,
+                        })
+                      )
+                    }
                   >
                     +
                   </button>
@@ -63,7 +87,7 @@ export default function CartItem() {
                 <div style={{ marginTop: 10 }}>
                   <button
                     className="smallBtn"
-                    onClick={() => dispatch(removeFromCart(item.id))}
+                    onClick={() => dispatch(removeItem(item.id))}
                   >
                     Delete
                   </button>

@@ -12,7 +12,7 @@ function Landing() {
   return (
     <div className="landing">
       <div className="landingCard">
-        <h1 style={{ marginTop: 0 }}>Paradise Nursery</h1>
+        <h1 style={{ marginTop: 0 }}>Welcome to Paradise Nursery</h1>
         <p style={{ fontSize: 18, lineHeight: 1.5 }}>
           Welcome to Paradise Nursery — your online destination for beautiful houseplants.
           Browse categories, add plants to your cart, and manage quantities easily.

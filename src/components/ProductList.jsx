@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, selectCartItems } from "../redux/CartSlice";
+import { addItem, selectCartItems } from "../redux/CartSlice";
 
 const data = [
   {
@@ -69,7 +69,7 @@ export default function ProductList() {
                     <button
                       className="smallBtn"
                       disabled={added}
-                      onClick={() => dispatch(addToCart(p))}
+                      onClick={() => dispatch(addItem(p))}
                     >
                       {added ? "Added" : "Add to Cart"}
                     </button>
